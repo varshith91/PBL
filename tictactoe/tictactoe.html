@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Code Crushers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css">
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>  -->
+    <link rel="stylesheet" href="tictactoe.css">
+    <link rel="icon" type="image/x-icon" href="satan.jpeg">
+    <link rel="stylesheet" href="./style.css">
+    
+</head>
+<div class="black">
+  <div class="background">
+      <div class="navbar">
+          <div class="contain">
+              <img src="photos/pac2.jpeg" alt="pacman" class="pacman2"/>
+          </div>
+          <div class="innernavbar">
+              <h1 class="title">Code Crushers</h1>
+          </div>
+          <div class="contain">
+              <img src="photos/pac.jpeg" alt="pacman" class="pacman1"/>
+          </div>
+      </div>
+      <br>
+      <div class="container">
+        <div class="grid">
+            <table class="table0">
+                <tr>
+                    <th>TIC</th>
+                    <th>TAC</th>
+                    <th>TOE</th>
+                </tr>
+                <tr>
+                    <td><button type="button" onclick="game(0,0)" class="cellbutton"><p id="cell1" class="textincell">1</p></button> </td>
+                    <td><button type="button" onclick="game(0,1)" class="cellbutton"><p id="cell2" class="textincell">2</p></button> </td>
+                    <td><button type="button" onclick="game(0,2)" class="cellbutton"><p id="cell3" class="textincell">3</p></button> </td>
+                </tr>
+                <tr>
+                    <td><button type="button" onclick="game(1,0)" class="cellbutton"><p id="cell4" class="textincell">4</p></button> </td>
+                    <td><button type="button" onclick="game(1,1)" class="cellbutton"><p id="cell5" class="textincell">5</p></button> </td>
+                    <td><button type="button" onclick="game(1,2)" class="cellbutton"><p id="cell6" class="textincell">6</p></button> </td>                  
+                </tr>
+                <tr>
+                    <td><button type="button" onclick="game(2,0)" class="cellbutton"><p id="cell7" class="textincell">7</p></button> </td>
+                    <td><button type="button" onclick="game(2,1)" class="cellbutton"><p id="cell8" class="textincell">8</p></button> </td>
+                    <td><button type="button" onclick="game(2,2)" class="cellbutton"><p id="cell9" class="textincell">9</p></button> </td>
+                </tr>
+            </table>
+        </div>
+      </div>
+  </div>
+  <br>
+  <div  class="turnind">
+    <h1>TIC TAC TOE</h1>
+    <p id="turnIndicator">Turn: O</p>
+    <h1 id="declare"></h1>
+  </div>
+</div>
+<script>
+class TicTacToe {
+  constructor() {
+    this.Xset = [[0,0,0],[0,0,0],[0,0,0]];
+    this.Oset = [[0,0,0],[0,0,0],[0,0,0]];
+    this.turn = 0; // 0 for O, 1 for X
+    this.updateTurnIndicator();
+  }
+
+  display() {
+    const cells = [
+      [0, 0, "cell1"], [0, 1, "cell2"], [0, 2, "cell3"],
+      [1, 0, "cell4"], [1, 1, "cell5"], [1, 2, "cell6"],
+      [2, 0, "cell7"], [2, 1, "cell8"], [2, 2, "cell9"]
+    ];
+    let str = 
+    cells.forEach(([r, c, id]) => {
+      let value = this.Xset[r][c] == 1 ? 'X' : this.Oset[r][c] == 1 ? 'O' : "-";
+      document.getElementById(id).innerHTML = value;
+    });
+  }
+
+  getMove(r, c) {
+    if (this.Xset[r][c] === 1 || this.Oset[r][c] === 1) {
+      return; // Prevent move if cell is already filled
+    }
+
+    if (this.turn === 0) {
+      this.Oset[r][c] = 1;
+    } else {
+      this.Xset[r][c] = 1;
+    }
+
+    this.turn = 1 - this.turn;
+    this.display();
+    this.check();
+    this.updateTurnIndicator();
+  }
+
+  check() {
+    const winPatterns = [
+      // Rows
+      [[0, 0], [0, 1], [0, 2]],
+      [[1, 0], [1, 1], [1, 2]],
+      [[2, 0], [2, 1], [2, 2]],
+      // Columns
+      [[0, 0], [1, 0], [2, 0]],
+      [[0, 1], [1, 1], [2, 1]],
+      [[0, 2], [1, 2], [2, 2]],
+      // Diagonals
+      [[0, 0], [1, 1], [2, 2]],
+      [[0, 2], [1, 1], [2, 0]]
+    ];
+
+    for (const pattern of winPatterns) {
+      const [a, b, c] = pattern;
+      if (this.Xset[a[0]][a[1]] && this.Xset[b[0]][b[1]] && this.Xset[c[0]][c[1]]) {
+        document.getElementById("declare").innerHTML="X wins!"
+        this.reset();
+        return;
+      }
+      if (this.Oset[a[0]][a[1]] && this.Oset[b[0]][b[1]] && this.Oset[c[0]][c[1]]) {
+        document.getElementById("declare").innerHTML="O wins!"
+        this.reset();
+        return;
+      }
+    }
+
+    // Check for draw
+    if ([...this.Xset.flat(), ...this.Oset.flat()].filter(val => val === 1).length === 9) {
+      document.getElementById("declare").innerHTML="TIE!"
+      this.reset();
+    }
+  }
+
+  updateTurnIndicator() {
+    const turnText = this.turn === 0 ? 'O' : 'X';
+    document.getElementById("turnIndicator").innerHTML = `Turn: ${turnText}`;
+  }
+
+  reset() {
+    this.Xset = [[0,0,0],[0,0,0],[0,0,0]];
+    this.Oset = [[0,0,0],[0,0,0],[0,0,0]];
+    this.turn = 0;
+    this.display();
+    this.updateTurnIndicator();
+  }
+}
+
+const ttt = new TicTacToe();
+
+function game(r, c) {
+  ttt.getMove(r, c);
+}
+</script>
+
+</body>
+</html>

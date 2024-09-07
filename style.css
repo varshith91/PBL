@@ -1,0 +1,176 @@
+        .navbar{
+            width: auto;
+            height: 1cm;
+            background: #16172e;
+            border-style: solid;
+            border-radius: 5px;
+            padding: auto;
+        
+
+        }
+        body {           
+            /* filter: brightness(10%); */
+            margin: 0;
+            padding: 0;
+        }
+        .black{
+            z-index: -2;
+            background-image: url('photos/black.jpg');
+        }
+        .background{
+            z-index: -1;
+            width: auto;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('photos/678225-aestheticwp.jpg');
+            background-size: 100%;
+            background-position: center;
+            height: 200vh;
+            background-size: cover;
+            background-attachment: fixed;
+            filter: brightness(0.6); /* Adjust brightness as needed */
+        }
+        .navbar{
+            margin-top: auto;
+            border-radius:  15px 50px;
+            float: top;
+            background-color: rgb(93, 10, 10);
+            width: auto;
+            height: 2.3cm;
+        }
+        .innernavbar{
+            position: absolute;
+            left: 10%;
+           width: 80%;
+        }
+        
+        .title {
+            animation-name: slideIn;
+            animation-duration: 3s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: reverse;
+            animation-delay: 0s;
+            font-size: 0.9cm;
+            color: #debf7c;
+            /* padding-left:; */
+        }
+        
+        /* Define the keyframes for the animation */
+        @keyframes slideIn {
+            from {
+                transform: translateX(120%);
+                opacity: 0;
+            }
+            60%{
+                transform: translateX(0%);
+                opacity: 1; 
+            }
+            
+            /* 80% {
+                transform: translateX(0%);
+                opacity: 1;
+            } */
+        }
+        /* .contain{
+            top: 0;
+            left: 15%; 
+            width: 90%; 
+            height: 100%;
+            overflow:hidden
+        } */
+        .pacman1{
+            float: right;
+            width: 2.3cm;
+            height: 2.3cm;
+            /* float: right; */
+            overflow: auto;
+        }
+        .pacman2{
+            float: left;
+            width: 2.3cm;
+            height: 2.3cm;
+            /* float: right; */
+            overflow: auto;
+        }
+        h1{
+            font-style: italic;
+        }
+        .container{
+            position: absolute;
+            width:90%;
+            left:5%;
+        }
+        .bigcontainer{
+            width: 100%;
+            overflow: auto;
+        }
+        .smallcontainer1{
+            width: 25%;
+            border-width: medium;
+            border-style: solid;
+            float:left;
+            background-color: maroon;
+            /* opacity: 60%; */
+            padding: 10px;
+            height: 7cm;
+            border-radius: 1cm;
+            
+        }
+        .smallcontainer2{
+            position: absolute;
+            left: 37%;
+            width: 25%;
+            border-width: medium;
+            border-style: solid;
+            float:left;
+            background-color: maroon;
+            /* opacity: 60%;s */
+            padding: 10px;
+            height: 7cm;
+            border-radius: 1cm;
+            overflow: hidden;
+            text-overflow: clip;
+            
+        }
+        .smallcontainer3{
+            
+            width: 25%;
+            border-width: medium;
+            border-style: solid;
+            float: right;
+            background-color: maroon;
+            /* opacity: 60%; */
+            padding: 10px;
+            height: 7cm;
+            border-radius: 1cm;
+            
+        }
+        .thumbnail{
+            position: absolute;
+            z-index: 2;
+            height: 100%;
+            width:5.4cm; 
+            border-radius: 0.7cm;
+            padding: auto;
+            border-style: solid;
+            border-width: 2px;
+            top:0;
+            left:0;
+            float: left;
+            /* opacity: 0; */
+        }
+        .textblock{
+            position: absolute;
+            float: right;
+            width: 40%;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            padding: 5px;
+            overflow: hidden;
+            
+        }
+        .text{
+            color: rgb(182, 200, 215);
+            font-weight: bold;
+        }
+       
